@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Billing Online</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('motor1.jpeg'); /* Gambar latar belakang */
+            background-size: cover;
+            background-position: center;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid aliceblue;
+            border-radius: 5px;
+            background-color: aquamarine;
+        }
+
+        input[type="number"], input[type="submit"] {
+            width: 95%;
+            margin-bottom: 10px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        #result {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Billing Online</h2>
+        <form id="inputForm">
+            <input type="number" id="seconds" placeholder="Masukkan Jumlah Detik">
+            <input type="submit" value="Hitung Tagihan">
+        </form>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        document.getElementById("inputForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Get input values
+            var seconds = parseInt(document.getElementById("seconds").value);
+
+            // Calculate billing
+            var pulses = Math.ceil(seconds / 45);
+            var bill = pulses * 30;
+
+            // Display result
+            var resultDiv = document.getElementById("result");
+            resultDiv.innerHTML = "Jumlah Pulsa: " + pulses + "<br>Tagihan: Rp " + bill;
+        });
+    </script>
+</body>
+</html>
