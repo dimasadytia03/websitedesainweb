@@ -10,15 +10,22 @@
             background-image: url('motor1.jpeg'); /* Gambar latar belakang */
             background-size: cover;
             background-position: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
         }
 
         .container {
             max-width: 400px;
-            margin: 0 auto;
             padding: 20px;
             border: 1px solid aliceblue;
             border-radius: 5px;
             background-color: aquamarine;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
         input[type="number"], input[type="submit"] {
@@ -50,7 +57,7 @@
     <div class="container">
         <h2>Billing Online</h2>
         <form id="inputForm">
-            <input type="number" id="seconds" placeholder="Masukkan Jumlah Detik">
+            <input type="number" id="seconds" placeholder="Masukkan Jumlah Detik" required>
             <input type="submit" value="Hitung Tagihan">
         </form>
         <div id="result"></div>
@@ -63,13 +70,24 @@
             // Get input values
             var seconds = parseInt(document.getElementById("seconds").value);
 
+            // Calculate time breakdown
+            var days = Math.floor(seconds / (24 * 3600));
+            var hours = Math.floor((seconds % (24 * 3600)) / 3600);
+            var minutes = Math.floor((seconds % 3600) / 60);
+            var remainingSeconds = seconds % 60;
+
             // Calculate billing
             var pulses = Math.ceil(seconds / 45);
             var bill = pulses * 30;
 
             // Display result
             var resultDiv = document.getElementById("result");
-            resultDiv.innerHTML = "Jumlah Pulsa: " + pulses + "<br>Tagihan: Rp " + bill;
+            resultDiv.innerHTML = "Jumlah Pulsa: " + pulses + "<br>Tagihan: Rp " + bill +
+                                  "<br><br>Rincian Waktu:" + 
+                                  "<br>Hari: " + days + 
+                                  "<br>Jam: " + hours + 
+                                  "<br>Menit: " + minutes + 
+                                  "<br>Detik: " + remainingSeconds;
         });
     </script>
 </body>

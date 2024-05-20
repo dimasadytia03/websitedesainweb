@@ -63,13 +63,33 @@
                 <option value="11">November</option>
                 <option value="12">Desember</option>
             </select>
-            <input type="number" id="day" placeholder="Masukkan Tanggal">
+            <input type="number" id="day" placeholder="Masukkan Tanggal" min="1" max="31">
             <input type="submit" value="Lihat Ramalan">
         </form>
         <div id="result"></div>
     </div>
 
     <script>
+        document.getElementById("month").addEventListener("change", function() {
+            var month = parseInt(this.value);
+            var dayInput = document.getElementById("day");
+            var maxDay = 31;
+
+            if (month === 4 || month === 6 || month === 9 || month === 11) {
+                maxDay = 30;
+            } else if (month === 2) {
+                var year = new Date().getFullYear();
+                if ((year % 4 === 0 && year % 100 !== 0) || year % 400 === 0) {
+                    maxDay = 29; // Tahun kabisat
+                } else {
+                    maxDay = 28;
+                }
+            }
+
+            dayInput.max = maxDay;
+            dayInput.value = Math.min(dayInput.value, maxDay);
+        });
+
         document.getElementById("inputForm").addEventListener("submit", function(event) {
             event.preventDefault(); // Prevent form submission
 
