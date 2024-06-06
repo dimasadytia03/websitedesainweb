@@ -1,97 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Perhitungan Gaji</title>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background-image: url('motor1.jpeg'); /* Gambar latar belakang */
-        background-size: cover;
-        background-position: center;
-        margin: 0;
-        padding: 0;
-    }
-    .container {
-        max-width: 500px;
-        margin: 50px auto;
-        background-color: aquamarine;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    h2 {
-        text-align: center;
-        color: #333;
-    }
-    label {
-        font-weight: bold;
-    }
-    input[type="number"] {
-        width: 95%;
-        padding: 10px;
-        margin-bottom: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
-    button {
-        display: block;
-        width: 100%;
-        padding: 10px;
-        background-color: #0abb80;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-    button:hover {
-        background-color: #854581;
-    }
-    #hasil {
-        margin-top: 20px;
-        padding: 10px;
-        background-color: #00ff00d5;
-        border-radius: 5px;
-    }
-</style>
-<script>
-    function hitungGaji() {
-        var gajiPerHari = 50000;
-        var uangMakan = 5000;
-        var hariKerja = parseInt(document.getElementById("hariKerjaInput").value);
-        var jamLembur = parseInt(document.getElementById("jamLemburInput").value);
-        
-        // Hitung gaji lembur berdasarkan ketentuan
-        var gajiLembur = 0;
-        if (jamLembur >= 3) {
-            gajiLembur = 35000 * jamLembur;
-        } else if (jamLembur === 1) {
-            gajiLembur = 25000;
-        } else if (jamLembur === 2) {
-            gajiLembur = 50000;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perhitungan Gaji</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(45deg, #B5E1F9, #A3D6FF);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
         }
 
-        // Hitung uang makan hanya jika hari kerja minimal 20 hari
-        var totalUangMakan = hariKerja >= 20 ? uangMakan * hariKerja : 0;
+        .container {
+            background-color: #fff;
+            border-radius: 16px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            text-align: center;
+            width: 400px;
+            margin: 40px auto;
+        }
 
-        // Hitung gaji total
-        var gajiTotal = (gajiPerHari * hariKerja) + totalUangMakan + gajiLembur;
+        form {
+            margin-bottom: 20px;
+        }
 
-        // Menampilkan hasil
-        document.getElementById("hasil").innerHTML = "Hari Kerja: " + hariKerja + "<br>Jam Lembur: " + jamLembur + "<br>Gaji Lembur: Rp " + gajiLembur + "<br>Uang Makan: Rp " + totalUangMakan + "<br>Gaji Total: Rp " + gajiTotal;
-    }
-</script>
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #4285F4;
+        }
+
+        input[type="number"] {
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            width: calc(100% - 32px);
+            margin-bottom: 15px;
+            display: inline-block;
+            font-size: 16px;
+        }
+
+        button[type="submit"] {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            background-color: #4285F4;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #2A6BDF;
+        }
+
+        .result-container {
+            background-color: #f2f2f2;
+            border: 1px solid #ddd;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: left;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .result-container p {
+            margin: 5px 0;
+            font-weight: bold;
+            color: #4285F4;
+        }
+
+        /* Icon styling */
+        .icon {
+            font-size: 48px;
+            color: #4285F4;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h2>Perhitungan Gaji</h2>
-        <label for="hariKerjaInput">Jumlah Hari Kerja:</label>
-        <input type="number" id="hariKerjaInput" name="hariKerjaInput"><br>
-        <label for="jamLemburInput">Jumlah Jam Lembur:</label>
-        <input type="number" id="jamLemburInput" name="jamLemburInput"><br><br>
-        <button onclick="hitungGaji()">Hitung Gaji</button><br><br>
-        <div id="hasil"></div>
+
+<div class="container">
+    <div class="icon">
+        <i class="fas fa-money-bill-alt"></i>
     </div>
+    <h2 style="color: #4285F4;">Perhitungan Gaji</h2>
+    <form id="gajiForm" action="#">
+        <label for="hariKerja">Jumlah Hari Kerja:</label>
+        <input type="number" id="hariKerja" name="hariKerja" required>
+        <label for="jamLembur">Jumlah Jam Lembur:</label>
+        <input type="number" id="jamLembur" name="jamLembur" required>
+        <button type="submit">Hitung Total</button>
+    </form>
+
+    <div id="totalGaji" class="result-container" style="display: none;">
+        <p id="gajiHarian"></p>
+        <p id="gajiLembur"></p>
+        <p id="bonusMakan"></p>
+        <p id="resultText"></p>
+    </div>
+</div>
+
+<script>
+    document.getElementById("gajiForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        
+        var hariKerja = parseInt(document.getElementById("hariKerja").value);
+        var jamLembur = parseInt(document.getElementById("jamLembur").value);
+        
+        var totalGaji = hitungTotalGaji(hariKerja, jamLembur);
+        
+        var gajiHarian = hariKerja * 50000;
+        var tarifLembur = jamLembur >= 3 ? 35000 : (jamLembur >= 1 ? 25000 : 0);
+        var gajiLembur = jamLembur * tarifLembur;
+        var bonusMakan = hariKerja == 20 ? 5000 * hariKerja : 0;
+        
+        document.getElementById("gajiHarian").textContent = "Gaji Harian: Rp " + gajiHarian.toLocaleString();
+        document.getElementById("gajiLembur").textContent = "Gaji Lembur: Rp " + gajiLembur.toLocaleString();
+        document.getElementById("bonusMakan").textContent = "Bonus Makan: Rp " + bonusMakan.toLocaleString();
+        document.getElementById("resultText").innerHTML = "<strong>Total Gaji: Rp " + totalGaji.toLocaleString() + "</strong>";
+        
+        document.getElementById("totalGaji").style.display = "block";
+    });
+
+    function hitungTotalGaji(hariKerja, jamLembur) {
+        var gajiPerHari = 50000;
+        var gajiHarian = hariKerja * gajiPerHari;
+        
+        var tarifLembur = 0;
+        if (jamLembur >= 3) {
+            tarifLembur = 35000;
+        } else if (jamLembur >= 1) {
+            tarifLembur = 25000;
+        }
+        var gajiLembur = jamLembur * tarifLembur;
+        
+        var bonusMakan = 0;
+        if (hariKerja == 20) {
+            bonusMakan = 5000 * hariKerja;
+        }
+        
+        var totalGaji = gajiHarian + gajiLembur + bonusMakan;
+        return totalGaji;
+    }
+</script>
+
 </body>
 </html>

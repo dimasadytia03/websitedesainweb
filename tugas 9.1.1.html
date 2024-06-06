@@ -7,79 +7,90 @@
 <style>
     body {
         font-family: Arial, sans-serif;
-        background: linear-gradient(90deg, #4CAF50, #2c3e50); /* Gradient latar belakang */
+        background-color: #d0e6b1; /* Light green background */
         margin: 0;
         padding: 0;
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100vh;
+        height: 160vh;
     }
     .container {
-        max-width: 400px;
+        max-width: 800px;
         background-color: #fff;
-        padding: 20px;
+        padding: 90px; /* Increased padding */
         border-radius: 10px;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Bayangan */
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        text-align: center;
     }
     h2 {
-        text-align: center;
         color: #333;
+        margin-bottom: 30px;
+        font-size: 38px;
     }
     label {
+        display: block;
         font-weight: bold;
-        color: #333; /* Warna teks label */
-    }
-    input[type="number"] {
-        width: 95%;
-        padding: 10px;
+        color: #333;
         margin-bottom: 10px;
+        font-size: 18px;
+    }
+    input[type="number"], input[type="text"] {
+        width: calc(100% - 30px); /* Adjusted width to accommodate larger padding */
+        padding: 19px;
+        margin: 15px 0;
         border: 1px solid #ccc;
         border-radius: 5px;
+        font-size: 18px;
+        box-sizing: border-box;
     }
     button {
-        display: block;
         width: 100%;
-        padding: 10px;
-        background-color:  #0abb80;
+        padding: 20px;
+        background-color: #66BB6A; /* Lighter green */
         color: #fff;
         border: none;
         border-radius: 5px;
         cursor: pointer;
-        transition: background-color 0.3s ease; /* Animasi perubahan warna latar belakang */
+        font-size: 20px;
+        transition: background-color 0.3s ease;
     }
     button:hover {
-        background-color: #1a0000;
+        background-color: #43A047; /* Darker shade on hover */
     }
     #hasil {
-        margin-top: 20px;
-        padding: 10px;
-        background-color: #15dd30c4;
+        margin-top: 50px;
+        padding: 20px;
+        background-color: #9C9D6A; /* Millennium Jade */
         border-radius: 5px;
-        color: #fff; /* Warna teks hasil */
+        color: #fff;
     }
 </style>
 <script>
     function konversiNilai() {
-        // Mendapatkan nilai dari input
         var nilai = parseFloat(document.getElementById("nilaiInput").value);
-        
-        // Melakukan konversi nilai
-        var grade;
+        var grade, keterangan;
+
         if (nilai >= 80 && nilai <= 100) {
             grade = 'A';
+            keterangan = 'Sangat Baik';
         } else if (nilai >= 70 && nilai < 80) {
             grade = 'B';
+            keterangan = 'Baik';
         } else if (nilai >= 60 && nilai < 70) {
             grade = 'C';
+            keterangan = 'Cukup';
         } else if (nilai >= 50 && nilai < 60) {
             grade = 'D';
+            keterangan = 'Kurang';
         } else {
             grade = 'E';
+            keterangan = 'Sangat Kurang';
         }
 
-        // Menampilkan hasil
-        document.getElementById("hasil").innerHTML = "Nilai Anda: " + nilai + "<br>Grade: " + grade;
+        document.getElementById("nilaiOutput").value = nilai;
+        document.getElementById("gradeOutput").value = grade;
+        document.getElementById("keteranganOutput").value = keterangan;
     }
 </script>
 </head>
@@ -89,7 +100,14 @@
         <label for="nilaiInput">Masukkan Nilai:</label>
         <input type="number" id="nilaiInput" name="nilaiInput"><br><br>
         <button onclick="konversiNilai()">Konversi</button><br><br>
-        <div id="hasil"></div>
+        <div id="hasil">
+            <label for="nilaiOutput">Nilai Anda:</label>
+            <input type="text" id="nilaiOutput" readonly><br>
+            <label for="gradeOutput">Grade:</label>
+            <input type="text" id="gradeOutput" readonly><br>
+            <label for="keteranganOutput">Keterangan:</label>
+            <input type="text" id="keteranganOutput" readonly>
+        </div>
     </div>
 </body>
 </html>

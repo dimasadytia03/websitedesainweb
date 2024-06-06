@@ -7,55 +7,86 @@
 <style>
     body {
         font-family: Arial, sans-serif;
-        margin: 100;
-        padding: 80 ;
+        margin: 0;
+        padding: 0;
         background-image: url('motor1.jpeg'); /* Gambar latar belakang */
         background-size: cover;
         background-position: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 220vh;
     }
     .container {
-        max-width: 500px;
-        margin: 50px auto;
-        background-color: aquamarine;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        width: 100%;
+        margin: 20px;
+        background-color: rgba(255, 255, 255, 0.9); /* Transparansi latar belakang */
+        border-radius: 15px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        padding: 40px; /* Padding lebih besar */
+        box-sizing: border-box;
     }
     h2 {
         text-align: center;
         color: #333;
+        font-size: 28px; /* Ukuran font lebih besar */
+        margin-bottom: 20px;
     }
     label {
         font-weight: bold;
         color: #333; /* Warna teks label */
+        display: block;
+        margin-top: 10px;
+        font-size: 18px;
     }
     input[type="text"],
     input[type="number"] {
-        width: 90%;
-        padding: 10px;
-        margin-bottom: 10px;
+        width: calc(100% - 20px); /* Lebar input lebih besar */
+        padding: 15px; /* Padding input lebih besar */
+        margin-bottom: 15px;
         border: 1px solid #ccc;
-        border-radius: 5px;
+        border-radius: 10px;
+        font-size: 18px; /* Ukuran font input lebih besar */
+        box-sizing: border-box;
     }
     button {
         display: block;
         width: 100%;
-        padding: 10px;
-        background-color:  #0abb80;
+        padding: 15px; /* Padding tombol lebih besar */
+        background-color: #0abb80; /* Warna tombol */
         color: #fff;
         border: none;
-        border-radius: 5px;
+        border-radius: 10px;
         cursor: pointer;
+        font-size: 20px; /* Ukuran font tombol lebih besar */
         transition: background-color 0.3s ease;
+        margin-top: 10px;
     }
     button:hover {
-        background-color: #0056b3;
+        background-color: #0056b3; /* Warna tombol saat hover */
     }
-    #hasil {
+    .hasil-container {
         margin-top: 20px;
-        padding: 10px;
+        padding: 20px;
         background-color: rgba(9, 223, 38, 0.8); /* Warna latar belakang hasil dengan transparansi */
-        border-radius: 5px;
+        border-radius: 10px;
         color: #fff; /* Warna teks hasil */
+        font-size: 18px;
+    }
+    .hasil-container label {
+        display: block;
+        margin-bottom: 5px;
+    }
+    .hasil-container input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        background-color: rgba(255, 255, 255, 0.8); /* Background input hasil */
+        color: #333; /* Warna teks input hasil */
     }
 </style>
 <script>
@@ -74,7 +105,10 @@
         }
 
         // Menampilkan hasil
-        document.getElementById("hasil").innerHTML = "Nama Barang: " + nama + "<br>Harga Barang: " + harga + "<br>Jumlah: " + jumlah + "<br>Total Bayar: " + totalBayar;
+        document.getElementById("namaOutput").value = nama;
+        document.getElementById("hargaOutput").value = harga;
+        document.getElementById("jumlahOutput").value = jumlah;
+        document.getElementById("totalBayarOutput").value = totalBayar;
     }
 </script>
 </head>
@@ -88,7 +122,16 @@
         <label for="jumlahInput">Jumlah Barang:</label>
         <input type="number" id="jumlahInput" name="jumlahInput"><br><br>
         <button onclick="hitungTotal()">Hitung Total</button><br><br>
-        <div id="hasil"></div>
+        <div class="hasil-container">
+            <label for="namaOutput">Nama Barang:</label>
+            <input type="text" id="namaOutput" readonly><br>
+            <label for="hargaOutput">Harga Barang:</label>
+            <input type="text" id="hargaOutput" readonly><br>
+            <label for="jumlahOutput">Jumlah Barang:</label>
+            <input type="text" id="jumlahOutput" readonly><br>
+            <label for="totalBayarOutput">Total Bayar:</label>
+            <input type="text" id="totalBayarOutput" readonly>
+        </div>
     </div>
 </body>
 </html>

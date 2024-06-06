@@ -1,113 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Penerimaan Pegawai</title>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background-image: url('motor1.jpeg'); /* Gambar latar belakang */
-        background-size: cover;
-        background-position: center;
-        margin: 0;
-        padding: 0;
-    }
-    .container {
-        max-width: 500px;
-        margin: 50px auto;
-        background-color: aquamarine;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    h2 {
-        text-align: center;
-        color: #333;
-    }
-    label {
-        font-weight: bold;
-    }
-    input[type="radio"] {
-        margin-right: 10px;
-    }
-    input[type="number"] {
-        width: 95%;
-        padding: 10px;
-        margin-bottom: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
-    button {
-        display: block;
-        width: 100%;
-        padding: 10px;
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-    button:hover {
-        background-color: #0056b3;
-    }
-    #hasil {
-        margin-top: 20px;
-        padding: 10px;
-        background-color: #f0f0f0;
-        border-radius: 5px;
-    }
-</style>
-<script>
-    function cekPenerimaan() {
-        var jk = document.querySelector('input[name="jk"]:checked').value;
-        var tinggiBadan = parseInt(document.getElementById("tinggiBadanInput").value);
-        var beratBadan = parseInt(document.getElementById("beratBadanInput").value);
-        var ipk = parseFloat(document.getElementById("ipkInput").value);
-        var pendidikan = document.querySelector('input[name="pendidikan"]:checked').value;
-        
-        // Cek syarat penerimaan
-        var syaratPenerimaan = false;
-        if (jk === "laki-laki") {
-            if (tinggiBadan >= 170 && tinggiBadan <= 179 && beratBadan === (tinggiBadan - 110) && ipk >= 3 && ipk <= 4 && (pendidikan === "D3" || pendidikan === "S1")) {
-                syaratPenerimaan = true;
-            }
-        } else if (jk === "perempuan") {
-            if (tinggiBadan >= 160 && tinggiBadan <= 170 && beratBadan === (tinggiBadan - 110) && ipk >= 3 && ipk <= 4 && (pendidikan === "D3" || pendidikan === "S1")) {
-                syaratPenerimaan = true;
-            }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Penerimaan Pegawai</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: linear-gradient(to bottom right, #6A5ACD, #483D8B);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
+        .container {
+            max-width: 500px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        h2 {
+            color: #483D8B;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        label {
+            font-weight: bold;
+            color: #483D8B;
+            display: block;
+            margin-top: 10px;
+            font-size: 18px;
+        }
+        input[type="radio"],
+        input[type="number"] {
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        input[type="number"] {
+            padding: 10px;
+            border-radius: 8px;
+            border: 2px solid #483D8B;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #483D8B;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #6A5ACD;
+        }
+        .hasil-container {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: rgba(106, 90, 205, 0.8);
+            border-radius: 5px;
+            color: #fff;
+            font-size: 14px;
+        }
+        .hasil-container label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .hasil-container input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 5px;
+            border: none;
+            border-radius: 5px;
+            font-size: 12px;
+            background-color: rgba(255, 255, 255, 0.8);
+            color: #333;
+        }
+        .icon {
+            font-size: 48px;
+            color: #483D8B;
+            margin-bottom: 20px;
+        }
+        .form-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .form-row label {
+            margin-top: 0;
+        }
+    </style>
+    <script>
+        function cekPenerimaan() {
+            var jk = document.querySelector('input[name="jk"]:checked').value;
+            var tinggiBadan = parseInt(document.getElementById("tinggiBadanInput").value);
+            var beratBadan = parseInt(document.getElementById("beratBadanInput").value);
+            var ipk = parseFloat(document.getElementById("ipkInput").value);
+            var pendidikan = document.querySelector('input[name="pendidikan"]:checked').value;
 
-        // Menampilkan hasil
-        if (syaratPenerimaan) {
-            document.getElementById("hasil").innerHTML = "Selamat! Anda diterima sebagai pegawai.";
-        } else {
-            document.getElementById("hasil").innerHTML = "Maaf, Anda tidak memenuhi syarat penerimaan sebagai pegawai.";
+            // Cek syarat penerimaan
+            var syaratPenerimaan = false;
+            if (jk === "laki-laki") {
+                if (tinggiBadan >= 170 && tinggiBadan <= 179 && beratBadan === (tinggiBadan - 110) && ipk >= 3 && ipk <= 4 && (pendidikan === "D3" || pendidikan === "S1")) {
+                    syaratPenerimaan = true;
+                }
+            } else if (jk === "perempuan") {
+                if (tinggiBadan >= 160 && tinggiBadan <= 170 && beratBadan === (tinggiBadan - 110) && ipk >= 3 && ipk <= 4 && (pendidikan === "D3" || pendidikan === "S1")) {
+                    syaratPenerimaan = true;
+                }
+            }
+
+            // Menampilkan hasil
+            document.getElementById("hasilStatus").value = syaratPenerimaan ? "Selamat Anda diterima sebagai pegawai." : "Maaf, Anda tidak memenuhi syarat penerimaan sebagai pegawai.";
+            document.getElementById("kategori").value = syaratPenerimaan ? "Kategori: Pegawai" : "";
         }
-    }
-</script>
+    </script>
 </head>
 <body>
     <div class="container">
+        <div class="icon">
+            <i class="fas fa-user-tie"></i>
+        </div>
         <h2>Penerimaan Pegawai</h2>
-        <label for="jk">Jenis Kelamin:</label>
-        <input type="radio" id="laki-laki" name="jk" value="laki-laki">
-        <label for="laki-laki">Laki-laki</label>
-        <input type="radio" id="perempuan" name="jk" value="perempuan">
-        <label for="perempuan">Perempuan</label><br>
+        <div class="form-row">
+            <label for="jk">Jenis Kelamin:</label>
+            <div>
+                <input type="radio" id="laki-laki" name="jk" value="laki-laki" required>
+                <label for="laki-laki">Laki-laki</label>
+                <input type="radio" id="perempuan" name="jk" value="perempuan" required>
+                <label for="perempuan">Perempuan</label>
+            </div>
+        </div>
+        <div class="form-row">
+            <label for="ipkInput">IPK (Minimal 3.0):</label>
+            <input type="number" step="0.01" id="ipkInput" name="ipkInput" required>
+        </div>
         <label for="tinggiBadanInput">Tinggi Badan (cm):</label>
-        <input type="number" id="tinggiBadanInput" name="tinggiBadanInput"><br>
+        <input type="number" id="tinggiBadanInput" name="tinggiBadanInput" required><br>
         <label for="beratBadanInput">Berat Badan (kg):</label>
-        <input type="number" id="beratBadanInput" name="beratBadanInput"><br>
-        <label for="ipkInput">IPK:</label>
-        <input type="number" step="0.01" id="ipkInput" name="ipkInput"><br>
+        <input type="number" id="beratBadanInput" name="beratBadanInput" required><br>
         <label for="pendidikan">Pendidikan:</label>
-        <input type="radio" id="D3" name="pendidikan" value="D3">
+        <input type="radio" id="D3" name="pendidikan" value="D3" required>
         <label for="D3">D3</label>
-        <input type="radio" id="S1" name="pendidikan" value="S1">
+        <input type="radio" id="S1" name="pendidikan" value="S1" required>
         <label for="S1">S1</label><br><br>
         <button onclick="cekPenerimaan()">Cek Penerimaan</button><br><br>
-        <div id="hasil"></div>
+        <div class="hasil-container">
+            <label for="hasilStatus">Status Penerimaan:</label>
+            <input type="text" id="hasilStatus" readonly>
+            <label for="kategori">Kategori:</label>
+            <input type="text" id="kategori" readonly>
+        </div>
     </div>
 </body>
 </html>
